@@ -10,7 +10,8 @@ export default class App extends React.Component {
     showCamera: false,
     emailInput: "",
     passwordInput: "",
-    loggedIn: false
+    loggedIn: false,
+    userId: ""
   };
 
   render() {
@@ -27,7 +28,7 @@ export default class App extends React.Component {
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
           {this.state.showCamera ?
-            <MyCamera toggleCamera={() => this.toggleCamera()} />
+            <MyCamera userId={this.state.userId} toggleCamera={() => this.toggleCamera()} />
           :
             <HomeScreen
               handleLogin={() => this.handleLogin()}
@@ -75,6 +76,7 @@ export default class App extends React.Component {
       })
     })
     .then((resp)=> {
+      console.log("resp:", resp);
       return resp.json();
     })
     .then((resJson) => {
@@ -82,7 +84,8 @@ export default class App extends React.Component {
       if (resJson.success) {
         console.log("Login successful");
         this.setState({
-          loggedIn: true
+          loggedIn: true,
+          userId: resJson.userId
         });
       }
       else {
@@ -106,7 +109,8 @@ export default class App extends React.Component {
       this.setState({
         loggedIn: false,
         emailInput: "",
-        passwordInput: ""
+        passwordInput: "",
+        userId: ""
       });
     });
   }

@@ -30,14 +30,15 @@ snap = async () => {
     data.append('photo', {
       uri: photo.uri,
       type: 'image/jpeg', // or photo.type
-      name: 'testPhotoName'
+      name: 'testPhotoName',
     });
+    data.append("userId", this.props.userId);
     fetch("https://lessprep.herokuapp.com/api/photo", {
       method: 'post',
       body: data
     }).then(res => {
-      console.log(res)
-    });
+      console.log(res);
+    })
   }
 };
 
