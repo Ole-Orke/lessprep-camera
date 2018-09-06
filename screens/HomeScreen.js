@@ -25,11 +25,10 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
             <Image
               source={
-                require('../assets/images/robot-dev.png')
+                require('../assets/images/LessPrep_Logo_extended.png')
               }
               style={styles.welcomeImage}
             />
@@ -37,46 +36,52 @@ export default class HomeScreen extends React.Component {
 
           <View style={styles.getStartedContainer}>
 
-            <Text style={styles.getStartedText}>Lessprep</Text>
-
             {this.props.loggedIn ?
-              <View
-                style={{flex: 1, margin: 30}}>
-                <Button
-                  title="Log out"
-                  onPress={() => this.props.handleLogout()}
-                 />
+              <View style={styles.bigButtonContainer}>
+                <TouchableOpacity
+                  style={styles.bigButton}
+                  onPress={() => this.props.handleLogout()}>
+                    <Text style={{fontSize: 30}}>
+                      Log out
+                    </Text>
+                </TouchableOpacity>
               </View>
 
               :
-              <View style={{flex: 1, marginTop: 30, marginBottom: 30}}>
+              <View style={{flex: 1, marginTop: 70, marginBottom: 30}}>
                 <TextInput
+                  autoCapitalize="none"
                   textContentType="emailAddress"
-                  style={[styles.getStartedText, {minWidth: 150, height: 40}]}
+                  style={[styles.getStartedText, {minWidth: 220, height: 50, fontSize: 24}]}
                   placeholder="Email"
                   onChangeText={(e) => this.props.handleEmailChange(e)}
                   value={this.props.email}
+                  selectionColor={'#ff0000'}
                   required/>
                 <TextInput
                   secureTextEntry={true}
-                  textContentType="password" style={[styles.getStartedText, {minWidth: 150, height: 40}]}
+                  textContentType="password" style={[styles.getStartedText, {minWidth: 220, height: 50, fontSize: 24}]}
                   placeholder="Password"
                   onChangeText={(e) => this.props.handlePasswordChange(e)}
                   value={this.props.password}
+                  selectionColor={'#ff0000'}
                   required/>
                 <Button
                   onPress={() => this.props.handleLogin()}
+                  style={{fontSize: 24}}
                   title="Submit" />
               </View>
             }
 
             {this.props.loggedIn ?
-              <View
-                style={{flex: 1}}>
-                <Button
-                  title="Go to camera"
-                  onPress={() => this.props.toggleCamera()}
-                   />
+              <View style={styles.bigButtonContainer}>
+                <TouchableOpacity
+                  style={styles.bigButton}
+                  onPress={() => this.props.toggleCamera()}>
+                    <Text style={{fontSize: 30}}>
+                      Go to camera
+                    </Text>
+                </TouchableOpacity>
               </View>
               :
               <View
@@ -84,14 +89,7 @@ export default class HomeScreen extends React.Component {
                 <Text>Log in to enable camera</Text>
               </View>
             }
-
-
           </View>
-        </ScrollView>
-
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>Make sure you login to the website as well!</Text>
-        </View>
       </View>
     );
   }
@@ -135,6 +133,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  bigButtonContainer: {
+    flex: 1,
+    width: "100%",
+  },
+  bigButton: {
+    flex: 1,
+    width: "100%",
+    borderWidth: 1,
+    borderColor: "#efefef",
+    borderRadius: 2,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   developmentModeText: {
     marginBottom: 20,
     color: 'rgba(0,0,0,0.4)',
@@ -146,18 +157,21 @@ const styles = StyleSheet.create({
     paddingTop: 30,
   },
   welcomeContainer: {
+    flex: 1,
     alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
+    marginTop: 20,
+    marginBottom: -60,
   },
   welcomeImage: {
+    width: "80%",
     resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
+    marginTop: -320,
+    marginLeft: 0,
   },
   getStartedContainer: {
+    flex: 2,
     alignItems: 'center',
-    marginHorizontal: 50,
+    marginTop: 45,
   },
   homeScreenFilename: {
     marginVertical: 7,

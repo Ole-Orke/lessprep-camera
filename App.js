@@ -83,6 +83,7 @@ export default class App extends React.Component {
       console.log(resJson);
       if (resJson.success) {
         console.log("Login successful");
+        this.toggleCamera();
         this.setState({
           loggedIn: true,
           userId: resJson.userId
